@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
 import './App.module.css'
 import { api } from './api/api'
 import { useNavigate } from 'react-router'
+import { useState, useEffect } from 'react';
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,36 +12,37 @@ function App() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    const storageUser = localStorage.getItem('user')
-    if(storageUser){
-      setUser(JSON.parse(storageUser))
-      navigate('/userslist')
-    }
+      const storedUser = localStorage.getItem('user')
+      if(storedUser){
+        setUser(JSON.parse(storedUser))
+        navigate('/usersList')
+      }
   }, [navigate])
+  
 
-  const handleLogin = async(e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await api.post('/login', {email, password})
+      const response = await api.post('/login', { email, password })
       const user = response.data
 
       localStorage.setItem('user', JSON.stringify(user))
       setUser(user)
       navigate('/usersList')
-      console.log(response.data)
     } catch (error) {
-      setMessage('Erro no login: ' + (error.response.data?.message || 'verifique os dados'))
+      setMessage('Erro no login: ' + (error.response?.data?.message || 'Verifique os dados'))
     }
   }
 
   return (
-    <div style={{padding: "2rem"}}>
+    <div style={{ padding: '2rem' }}>
       <form onSubmit={handleLogin}>
         <h2>Login</h2>
-        <input type="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
-        <input type="password" placeholder='senha' value={password} onChange={(e) => setPassword(e.target.value)} required/>
-      <button type="submit">entrar</button>
-      <p>{message}</p>
+        <input type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder='Senha' value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <button type='submit'>Entrar</button>
+        <p>{message}</p>
       </form>
     </div>
   )
