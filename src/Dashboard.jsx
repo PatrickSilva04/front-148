@@ -10,11 +10,6 @@ function Dashboard() {
     const [productCount, setProductCount] = useState(0)
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user')
-        if (!storedUser) navigate('/')
-    }, [navigate])
-
-    useEffect(() => {
         async function fetchData() {
             try {
                 const [usersRes, productsRes] = await Promise.all([
