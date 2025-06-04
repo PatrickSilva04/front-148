@@ -2,45 +2,51 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { Menu } from "./components/menu";
 import { api } from "./api/api";
-import styles from './Dashboard.module.css'
+import styles from './Dashboard.module.css';
 
-function Dashboard() {
-    const navigate = useNavigate()
-    const [userCount, setUserCount] = useState(0)
-    const [productCount, setProductCount] = useState(0)
+function Dashboard(){
+    const Navigate = useNavigate()
+    const [userConst, setUserConst] = useState(0)
+    const [productConst, setProductConst] = useState(0)
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const [usersRes, productsRes] = await Promise.all([
-                    api.get('/users'),
-                    api.get('/list'),
-                    ])
-                setUserCount(usersRes.data.length)
-                setProductCount(productsRes.data.length)
-            } catch (err) {
-                console.error("Erro ao buscar dados do dashboard", err)
-            }
+        const storedUser = localStorage.getItem('user')
+        if(!storedUser) Navigate('/')
+    }, [Navigate])
+    
+    useEffect(() => {
+      async function fetchData(){
+        try {
+            const [usersRes, productsRes] = await Promise.all([
+                api.get('/users'),
+                api.get('/lists'),
+            ])
+            setUserConst(usersRes.data.length)
+            setProductConst(productsRes.data.length)
+        } catch (err) {
+            console.log("Erro ao buscar dados do Dashboard", err)
         }
-        fetchData()
+      }
+      fetchData()
     }, [])
+    
 
-
-    return (
+    console.log(userConst, productConst)
+    return(
         <section>
-            <Menu />
+            <Menu/>
             <div className={styles.wrapNav}>
-                <div className={styles.wrapItem} onClick={() => navigate('/#')}>
+                <div className={styles.wrapItem} onClick={() => Navigate('/#')}>
                     <p>Criar produto</p>
                 </div>
-                <div className={styles.wrapItem} onClick={() => navigate('/#')}>
-                    <p>Lista de produtos - ({productCount} produtos)</p>
+                <div className={styles.wrapItem} onClick={() => Navigate('/listslist')}>
+                    <p>Lista de produtos - ({productConst}, produtos)</p>
                 </div>
-                <div className={styles.wrapItem} onClick={() => navigate('/#')}>
-                    <p>Criar usuario</p>
+                <div className={styles.wrapItem} onClick={() => Navigate('/#')}>
+                    <p>Criar usuário</p>
                 </div>
-                <div className={styles.wrapItem} onClick={() => navigate('/usersList')}>
-                    <p>Lista de usuarios - ({userCount} usuarios)</p>
+                <div className={styles.wrapItem} onClick={() => Navigate('/userslist')}>
+                    <p>Lista de usuário - ({userConst}, usuários)</p>
                 </div>
             </div>
         </section>

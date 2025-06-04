@@ -1,27 +1,41 @@
-.wrapNav{
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-    gap: 20px;
+.wrapNav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
 }
 
-.wrapItem{
-    opacity: 0.8;
-    background-color: var(--dark);
-    width: 300px;
-    height: 150px;
-    padding: 20px;
-    border-radius: 20px;
-    border: 2px solid transparent;
-    transition: all 200ms ease-in-out;
+.wrapItem {
+  background-color: #1e3c72;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background-color 0.3s;
 }
 
-.wrapItem:hover{
-    box-shadow: rgba(82, 18, 134, 0.25) 0px 54px 55px, rgba(77, 19, 110, 0.12) 0px -12px 30px, rgba(72, 15, 99, 0.12) 0px 4px 6px, rgba(74, 25, 111, 0.17) 0px 12px 13px, rgba(86, 25, 144, 0.09) 0px -3px 5px;
-    opacity: 1;
-    transform: scale(1.02);
-    cursor: pointer;
-    border: 2px solid var(--light);
-    transition: all 200ms ease-in-out;
+.wrapItem:hover {
+  background-color: #16325c;
+  transform: scale(1.03);
+}
+
+.wrapItem p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .wrapNav {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .wrapItem {
+    padding: 1.5rem;
+  }
 }

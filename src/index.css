@@ -1,13 +1,21 @@
 :root {
-  --dark: #150e37;
-  --light: #674de9;
-  --white: #f0f8ff;
-  --black: #090909;
+  --dark: #808080;
+  --light: lightblue;
+  --white: white;
+  --black: black;
 }
 
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background-color: rgba(110, 42, 155, 1);
+  color: var(--white);
+}
+
+section{
+  display: flex;
 }
