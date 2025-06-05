@@ -9,7 +9,6 @@ import Dashboard from './Dashboard.jsx'
 import Contact from './Contact.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>}/>
@@ -18,5 +17,5 @@ createRoot(document.getElementById('root')).render(
         <Route path='/contact' element={<Contact/>}/>
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  ,
 )

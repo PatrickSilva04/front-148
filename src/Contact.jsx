@@ -3,7 +3,7 @@ import { useState } from "react"
 import style from './Contact.module.css'
 
 function Contact() {
- const defaultNumber = "5541999999999"
+ const defaultNumber = "5541991540580"
  const [formData, setFormData] = useState({
     name: "",
     email: "",
